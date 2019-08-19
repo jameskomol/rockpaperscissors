@@ -1,0 +1,124 @@
+<!DOCTYPE hmtl>
+<html>
+    <head>
+        <title> My little experiment </title>
+    </head>
+
+    <body>
+    <script>
+
+    function sentenceBuilder(device) {
+            switch (device) {
+                case "r":
+                    return "Rock beats scissors.";
+                case "p":
+                    return "Paper beats rock.";
+                case "s": 
+                    return "Scissors beats paper.";
+                default:
+                    return "FATAL ERROR 101!";
+            }
+    }
+    function announcer(who, device) {
+        //true means you won, false means the opposite!
+        if (who == true) {
+            return "You won! " + sentenceBuilder(device);
+        } else if (who == false) {
+            return "You lose! " + sentenceBuilder(device);
+        }
+        
+    }
+
+    function playRound(playerSelection, computerSelection) {
+        //This function specifies the game's logic.
+        if (playerSelection != computerSelection) {
+            if (playerSelection == "r") {
+                if (computerSelection == "s") {
+                    alert(announcer(true, playerSelection));
+                    return announcer(true, playerSelection);
+                } else {
+                    alert(announcer(false, computerSelection));
+                    return announcer(false, computerSelection)
+                }
+            }
+
+            if (playerSelection == "p") {
+                if (computerSelection == "r") {
+                    alert(announcer(true, playerSelection));
+                    return announcer(true, playerSelection);
+                } else {
+                    alert(announcer(false, computerSelection));
+                    return announcer(false, computerSelection)
+                }
+            }
+
+            if (playerSelection == "s") {
+                if (computerSelection == "p") {
+                    alert(announcer(true, playerSelection));
+                    return announcer(true, playerSelection);
+                } else {
+                    alert(announcer(false, computerSelection));
+                    return announcer(false, computerSelection)
+                }
+            }
+        // return this if it's a tie!
+        } else {
+            alert("TIE");
+            return "It's a tie.";
+        }
+    }
+    
+    function computerPlay() {
+        let comSelection = Math.floor(Math.random() * Math.floor(3));
+        switch (comSelection) {
+                case 0:
+                    return "r"
+                    break;
+                case 1:
+                    return "p";
+                    break;
+                case 2:
+                    return "s";
+                    break;
+                default:
+                    return "FATAL ERROR 102";
+    }
+}
+
+    function game() {
+        var yourStat = 0;
+        var comStat = 0;
+
+        for (var i = 0; i < 5; i++) {
+            let playerSelection = prompt("What d'you say?").charAt(0).toLowerCase();
+            let result = playRound(playerSelection, computerPlay()).charAt(4);
+            //Because playRound() returns sentences like "You won!.." You lose!.."
+            // we can accurately tell using the character at index 4 if you won or lose.
+            switch (result) {
+                case 'w': 
+                    yourStat += 1;
+                    break;
+                case 'l': 
+                    comStat += 1;
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (yourStat > comStat) {
+            return "You won this game!";
+        } else {
+            return "Computer won :(";
+        }
+    }
+    
+    alert(game());
+
+
+    
+
+    
+    </script>
+    </body>
+
+</html>
